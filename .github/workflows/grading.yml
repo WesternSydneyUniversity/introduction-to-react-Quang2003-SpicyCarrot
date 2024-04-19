@@ -38,6 +38,6 @@ jobs:
       - name: Autograding Reporter
         uses: education/autograding-grading-reporter@v1
         env:
-          NPM_RESULTS: "${{steps.npm.outputs.result}}"
+          NPM_RESULTS: "${{steps.npm1.outputs.result}},${{steps.npm2.outputs.result}}"
         with:
           runners: npm1,npm2
