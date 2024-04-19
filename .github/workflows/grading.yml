@@ -40,4 +40,4 @@ jobs:
         env:
           NPM_RESULTS: "${{steps.npm.outputs.result}}"
         with:
-          runners: npm
+          runners: npm1,npm2
