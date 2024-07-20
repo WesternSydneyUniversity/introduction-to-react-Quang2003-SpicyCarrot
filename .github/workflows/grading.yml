@@ -17,18 +17,27 @@ jobs:
           version: 8
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Test with Vitest
-        id: npm
+      - name: Test with Vitest 1
+        id: npm1
         uses: education/autograding-command-grader@v1
         with:
           test-name: NPM
           setup-command: pnpm install
-          command: pnpm test -- run
+          command: pnpm test -- run -t "Show the list of tasks"
+          timeout: 10
+          max-score: 1
+      - name: Test with Vitest 2
+        id: npm2
+        uses: education/autograding-command-grader@v1
+        with:
+          test-name: NPM
+          command: pnpm test -- run -t "Show the welcome header"
           timeout: 10
           max-score: 1
       - name: Autograding Reporter
         uses: education/autograding-grading-reporter@v1
         env:
-          NPM_RESULTS: "${{steps.npm.outputs.result}}"
+          NPM1_RESULTS: "${{steps.npm1.outputs.result}}"
+          NPM2_RESULTS: "${{steps.npm2.outputs.result}}"
         with:
-          runners: npm
+          runners: npm1,npm2
